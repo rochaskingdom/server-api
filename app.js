@@ -68,10 +68,24 @@ app.get('/products/name/:id', (req, res) => {
         } else if (!prod) {
             res.status(404).send({});
         } else {
-            res.status(200).send(prod);
+            res.status(200).send(prod.name);
+        }
+    });
+});
+
+app.post('/products', (req, res) => {
+    p = new Product({
+        name: req.body.name,
+        price: req.body.price,
+        department: req.body.price
+    });
+    p.save((err, prod) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(201).send(prod);
         }
     });
 })
-;
 
 app.listen(3000);
