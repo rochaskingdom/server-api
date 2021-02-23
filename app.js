@@ -88,4 +88,16 @@ app.post('/products', (req, res) => {
     });
 })
 
+app.delete('/products/:id', (req, res) => {
+    Product.deleteOne({_id: req.params.id},
+        (err) => {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(204).send({});
+            }
+        }
+    )
+});
+
 app.listen(3000);
